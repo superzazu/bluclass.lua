@@ -42,6 +42,14 @@ bluclass.bluclass = function (super)
 		return setmetatable(instance, class)
 	end
 
+	function class:__index(table, key)
+		if class[table] then
+			return class[table]
+		elseif class.super[table] then
+			return class.super[table]
+		end
+	end
+
 	return class
 end
 

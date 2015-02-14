@@ -10,7 +10,9 @@ end
 function vec2:__tostring()
 	return self.x .. ',' .. self.y
 end
-
+function vec2:get_x()
+	return self.x
+end
 my_vec2 = vec2:new(23, 0)
 print(my_vec2)
 
@@ -28,3 +30,4 @@ end
 my_vec3 = vec3:new(2, 0, -23)
 print(my_vec3)
 
+print(my_vec3:get_x())
