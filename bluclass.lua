@@ -1,5 +1,5 @@
 local bluclass = {
-    _VERSION        = 'bluclass 1.0.0',
+    _VERSION        = 'bluclass 1.0.1',
     _DESCRIPTION    = 'Lua OOP module with simple inheritance',
     _URL            = 'N/A',
     _LICENSE        = [[
