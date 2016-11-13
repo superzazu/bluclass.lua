@@ -1,9 +1,9 @@
 local bluclass = {
-    _VERSION        = 'bluclass 1.0.1',
+    _VERSION        = 'bluclass 1.0.2',
     _DESCRIPTION    = 'Lua OOP module with simple inheritance',
-    _URL            = 'N/A',
+    _URL            = 'https://github.com/superzazu/bluclass.lua',
     _LICENSE        = [[
-Copyright (c) 2015 Nicolas Allemand
+Copyright (c) 2015-2016 Nicolas Allemand
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-    ]]
+]]
 }
 
 bluclass.bluclass = function (super)
@@ -54,6 +54,7 @@ bluclass.bluclass = function (super)
 end
 
 setmetatable(bluclass, {
-	__call = function(_, ...) return bluclass.bluclass(...) end
+    __call = function(_, ...) return bluclass.bluclass(...) end
 })
+
 return bluclass

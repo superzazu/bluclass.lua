@@ -1,4 +1,4 @@
-describe("simple class test", function()
+describe('simple class test', function()
 
     setup(function()
         class = require '..bluclass'
@@ -19,7 +19,7 @@ describe("simple class test", function()
         -- inherits from vec2
         vec3 = class(vec2)
         function vec3:initialize(x, y, z)
-            vec2.initialize(self, x, y)
+            vec3.super.initialize(self, x, y)
             self.z = z
         end
         function vec3:__tostring()
@@ -28,15 +28,15 @@ describe("simple class test", function()
     end)
 
 
-    it("can create instance", function()
+    it('can create instance', function()
         my_vec2 = vec2:new(23, 0)
 
         assert.are.equal(my_vec2.x, 23)
         assert.are.equal(my_vec2.y, 0)
-        assert.are.equal(my_vec2:__tostring(), "23,0")
+        assert.are.equal(my_vec2:__tostring(), '23,0')
     end)
 
-    it("can inherit from class", function()
+    it('can inherit from class', function()
         my_vec3 = vec3:new(2, 0, -23)
 
         assert.are.equal(my_vec3.x, 2)
@@ -47,7 +47,7 @@ describe("simple class test", function()
         assert.are.equal(my_vec3:get_x(), 2)
     end)
 
-    it("does not call parent constructor if not specified", function()
+    it('does not call parent constructor if not specified', function()
         function vec3:initialize(x, y, z)
         end
 
@@ -56,14 +56,14 @@ describe("simple class test", function()
 
         -- going back to 'normal' constructor
         function vec3:initialize(x, y, z)
-            vec2.initialize(self, x, y)
+            vec3.super.initialize(self, x, y)
             self.z = z
         end
     end)
 
-    it("uses function from inherited class instead of parent class", function()
+    it('uses function from inherited class instead of parent class', function()
         my_vec3 = vec3:new(2, 0, -23)
-        assert.are.equal(my_vec3:__tostring(), "2,0,-23")
+        assert.are.equal(my_vec3:__tostring(), '2,0,-23')
     end)
 
 end)
