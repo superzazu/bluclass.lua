@@ -1,9 +1,9 @@
 local bluclass = {
-    _VERSION        = 'bluclass 1.0.2',
+    _VERSION        = 'bluclass 1.1.0',
     _DESCRIPTION    = 'Lua OOP module with simple inheritance',
     _URL            = 'https://github.com/superzazu/bluclass.lua',
     _LICENSE        = [[
-Copyright (c) 2015-2016 Nicolas Allemand
+Copyright (c) 2015-2019 Nicolas Allemand
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,36 +25,30 @@ THE SOFTWARE.
 ]]
 }
 
-bluclass.bluclass = function (super)
+bluclass.class = function(super)
     local class = {}
-    class.__index = class
     class.super = super
 
-    function class.new(self, ...)
+    class.new = function(self, ...)
         local instance = {}
+        instance.class = self
 
-        if class.initialize then
-            class.initialize(instance, ...)
-        elseif class.super.initialize then
-            class.super.initialize(instance, ...)
+        if self.init then
+            self.init(instance, ...)
+        elseif self.super ~= nil and self.super.init then
+            self.super.init(instance, ...)
         end
 
-        return setmetatable(instance, class)
-    end
-
-    function class:__index(table, key)
-        if class[table] then
-            return class[table]
-        elseif class.super[table] then
-            return class.super[table]
-        end
+        return setmetatable(instance, {__index = function(t, key)
+            if class[key] then
+                return class[key]
+            elseif class.super and class.super[key] then
+                return class.super[key]
+            end
+        end})
     end
 
     return class
 end
-
-setmetatable(bluclass, {
-    __call = function(_, ...) return bluclass.bluclass(...) end
-})
 
 return bluclass
